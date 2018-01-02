@@ -1,12 +1,12 @@
 
 
-    var offices = [
+    const offices = [
         { id: "GD", name: "Gdansk", headquarter: true },
         { id: "GL", name: "Gliwice" },
         { id: "KO", name: "Koszalin" }
     ];
 
-var workers = [
+const workers = [
     { id: 1,  name: "Bartek",     type: "P", office: "GD", salary: 300 },
     { id: 2,  name: "Wojtek",     type: "P", office: "GD", salary: 210 },
     { id: 3,  name: "Piotr",      type: "M", office: "GL", salary: 250 },
@@ -80,7 +80,6 @@ var workers = [
     console.log(companyAverageSalary);
 
 // 6) Wyswietl najlepiej oplacanego pracownika w poszczególnych biurach,
-
     const workersBestPaid = () => {
         return company.offices
             .map(office => {
@@ -93,14 +92,9 @@ var workers = [
 
     console.log(workersBestPaid());
 
-
     // 7) Wyswietl najlepiej oplacanego pracownika w calej firmie oraz nazwe jego biura.
-    
+    const salaryWorkers = allWorkers.map(worker => worker.salary);
+    const bestSalary = (Math.max(...salaryWorkers));
+    const bestPaid = allWorkers.find((office) => office.salary === bestSalary);
 
-// Uzyj konsoli do wyswietlenia danych. (wolaj w console.log funkcje, które zwracaja zadane wartosci, np. najlepiej oplacanego  pracowinika)
-// Uzywaj skladni z ES6 lub ES5 (badz konsekwentny)
-//
-// Ocenie poddane zostana:
-//     Organizacja kodu,
-//     Nazewnictwo zmiennych i obiektów,
-//     Latwosc ponownego uzycia / rozszerzalnosc kodu.
+    console.log(bestPaid);
