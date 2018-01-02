@@ -72,20 +72,31 @@ var workers = [
     console.log(officeInfo('Poznan'));
 
 // 5) Wyswietl srednia pensje w calej firmie,
-
     const allWorkers = company.offices.reduce((acc, next)=>
         acc.concat(next.workers), []);
-
     const companyAverageSalary = (allWorkers.reduce((acc, next) =>
         acc + next.salary, 0) / allWorkers.length);
 
     console.log(companyAverageSalary);
 
+// 6) Wyswietl najlepiej oplacanego pracownika w poszczególnych biurach,
 
-    // 6) Wyswietl najlepiej oplacanego pracownika w poszczególnych biurach,
-// 7) Wyswietl najlepiej oplacanego pracownika w calej firmie oraz nazwe jego biura.
-//
-//
+    const workersBestPaid = () => {
+        return company.offices
+            .map(office => {
+                const totalSalary = office.workers.map(worker => worker.salary);
+                const bestSalary = Math.max(...totalSalary);
+                return office.workers.filter(worker => worker.salary === bestSalary)
+            })
+            .reduce((prev, next) => prev.concat(next, []));
+    };
+
+    console.log(workersBestPaid());
+
+
+    // 7) Wyswietl najlepiej oplacanego pracownika w calej firmie oraz nazwe jego biura.
+    
+
 // Uzyj konsoli do wyswietlenia danych. (wolaj w console.log funkcje, które zwracaja zadane wartosci, np. najlepiej oplacanego  pracowinika)
 // Uzywaj skladni z ES6 lub ES5 (badz konsekwentny)
 //
