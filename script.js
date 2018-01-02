@@ -73,7 +73,16 @@ var workers = [
 
 // 5) Wyswietl srednia pensje w calej firmie,
 
-// 6) Wyswietl najlepiej oplacanego pracownika w poszczególnych biurach,
+    const allWorkers = company.offices.reduce((acc, next)=>
+        acc.concat(next.workers), []);
+
+    const companyAverageSalary = (allWorkers.reduce((acc, next) =>
+        acc + next.salary, 0) / allWorkers.length);
+
+    console.log(companyAverageSalary);
+
+
+    // 6) Wyswietl najlepiej oplacanego pracownika w poszczególnych biurach,
 // 7) Wyswietl najlepiej oplacanego pracownika w calej firmie oraz nazwe jego biura.
 //
 //
