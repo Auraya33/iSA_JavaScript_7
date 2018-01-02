@@ -29,17 +29,16 @@ var workers = [
 //
 //     Firma powinna posiadac:
 //     - liste Biur (tablice)
-    var company = { };
-
+    const company = { };
 
 // Natomiast Kazde biuro powinno posiadac liste Pracowników, id, name, oraz informacje czy jest glówna siedziba.
 //     Kazdy pracownik ma propercje office, która pozwala nam rozpoznac, do którego biura nalezy (id w offices).
-    company.offices = offices.map(function(office) {
+    company.offices = offices.map(office => {
         return {
             id: office.id,
             name: office.name,
             headquarter: office.headquarter || false,
-            workers: workers.filter(function(workers) {
+            workers: workers.filter(workers => {
                 return workers.office === office.id;
             })
         };
@@ -49,16 +48,36 @@ var workers = [
 //     Uzywajac obiektu „Firma” wykonaj nastepujace operacje (w kolejnosci):
 // 1) Wyswietl, informacje o biurze w Gliwicach (lokalizacja, liczba przypisanych pracowników, srednia pensja),
 
+    const officeInfo = office => company.offices.map(office => {
+        return {
+            location: office.name,
+            workers: office.workers.length,
+            averageSalary: (office.workers.reduce((acc, next) => acc + next.salary, 0) / office.workers.length)
+        }
+    })
+        .find(city => city.location === office);
+
+    console.log(officeInfo('Gliwice'));
 
 // 2) Dodaj nowe biuro (w Poznaniu),
+    company.offices.push({id: 'PO', name: 'Poznan', headquarter: false, workers:[]});
+
 // 3) Dodaj nowego pracownika do biura w Poznaniu: { id: 16, name: "Olek", type: "M", office: "PO", salary: 500 }
+    const newWorker = { id: 16, name: "Olek", type: "M", office: "PO", salary: 500 };
+    const addWorker = company.offices.find(({ id }) => id.includes('PO'));
+
+    addWorker.workers.push(newWorker);
+
 // 4) Wyswietl, informacje o biurze w Poznaniu
+    console.log(officeInfo('Poznan'));
+
 // 5) Wyswietl srednia pensje w calej firmie,
-//     6) Wyswietl najlepiej oplacanego pracownika w poszczególnych biurach,
-//     7) Wyswietl najlepiej oplacanego pracownika w calej firmie oraz nazwe jego biura.
+
+// 6) Wyswietl najlepiej oplacanego pracownika w poszczególnych biurach,
+// 7) Wyswietl najlepiej oplacanego pracownika w calej firmie oraz nazwe jego biura.
 //
 //
-//     Uzyj konsoli do wyswietlenia danych. (wolaj w console.log funkcje, które zwracaja zadane wartosci, np. najlepiej oplacanego pracowinika)
+// Uzyj konsoli do wyswietlenia danych. (wolaj w console.log funkcje, które zwracaja zadane wartosci, np. najlepiej oplacanego  pracowinika)
 // Uzywaj skladni z ES6 lub ES5 (badz konsekwentny)
 //
 // Ocenie poddane zostana:
