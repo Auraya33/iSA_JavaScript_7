@@ -63,10 +63,15 @@ const workers = [
     company.offices.push({id: 'PO', name: 'Poznan', headquarter: false, workers:[]});
 
 // 3) Dodaj nowego pracownika do biura w Poznaniu: { id: 16, name: "Olek", type: "M", office: "PO", salary: 500 }
-    const newWorker = { id: 16, name: "Olek", type: "M", office: "PO", salary: 500 };
-    const addWorker = company.offices.find(({ id }) => id.includes('PO'));
+    const addWorker = worker => {
+        company.offices
+            .find(office => office.id === worker.office)
+            .workers.push(worker);
 
-    addWorker.workers.push(newWorker);
+        addWorker.workers.push(newWorker);
+    };
+
+    const newWorker = { id: 16,  name: "Olek", type: "M", office: "PO", salary: 500 };
 
 // 4) Wyswietl, informacje o biurze w Poznaniu
     console.log(officeInfo('Poznan'));
