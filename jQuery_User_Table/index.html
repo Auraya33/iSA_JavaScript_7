@@ -29,7 +29,19 @@
     </style>
 </head>
 <body>
-
+<form>
+    <input id="inputFirstName" type="text" placeholder="First Name" name="firstName">
+    <input type="text" placeholder="Last Name" name="lastName">
+    <input id="inputAge" type="number" placeholder="Age" name="userAge">
+    <select id="citiesSelect" name="city">
+        <option value="Gdansk">Gdańsk</option>
+        <option value="Krakow">Kraków</option>
+        <option value="Tokyo">Tokyo</option>
+        <option value="Miami">Miami</option>
+        <option value="Hamburg">Hamburg</option>
+    </select>
+    <button id="sbm-btn" type="submit" disabled >Add user</button>
+</form>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="2_DOM_JQUERY_EVENTS.js"></script>
