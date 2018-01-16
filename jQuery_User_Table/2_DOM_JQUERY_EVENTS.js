@@ -75,23 +75,31 @@ $tableRow.on('mouseleave', removeHighlightClass);
 // B.
 // - nad tabela być formularz, który pobiera dane usera i puszuje go do tablicy users i od razu pokazuje na widoku.
 // - formularz ma mieć select, z 5 miastami do wyboru (Twoja decyzja), pozostałe wartości pobrane z inputów textowych
-// - przycisk do dodania użytkownika ma być odblokowany jeśli wiek age > 18 a firstName ma więcej niż 3 litery
 
 const $userForm = $(`<form>
                     <input id="inputFirstName" type="text" placeholder="First Name" name="firstName">
                     <input type="text" placeholder="Last Name" name="lastName">
-                    <input id="inputAge" type="text" placeholder="Age" name="userAge">
-                    <select name="city">
-                        <option value="Gdansk">Gdańsk</option>
-                        <option value="Krakow">Kraków</option>
-                        <option value="Tokyo">Tokyo</option>
-                        <option value="Miami">Miami</option>
-                        <option value="Hamburg">Hamburg</option>
+                    <input id="inputAge" type="number" placeholder="Age" name="userAge">
+                    <select id="citiesSelect" name="city">
+                   
                     </select>
                     <button id="sbm-btn" type="submit" disabled >Add user</button>
-                    </form>`);
+                   </form> `);
 
 $userForm.prependTo('body');
+
+const cities = ["Gdansk", "Krakow", "Tokyo", "Miami", "Hamburg"];
+const $citiesOption = $('#citiesSelect');
+
+const getSelectOptions = () => {
+    return cities.map(city => {
+        return $(`<option value=${city}>${city}</option>`)
+    })
+};
+
+$citiesOption.append(getSelectOptions());
+
+// - przycisk do dodania użytkownika ma być odblokowany jeśli wiek age > 18 a firstName ma więcej niż 3 litery
 const $userAge = $('#inputAge');
 const $userFirstName = $('#inputFirstName');
 const $submitButton = $('#sbm-btn');
