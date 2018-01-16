@@ -88,18 +88,23 @@ const $userForm = $(`<form>
                         <option value="Miami">Miami</option>
                         <option value="Hamburg">Hamburg</option>
                     </select>
-                    <button id="sbm-btn" type="submit" disabled>Add user</button>
+                    <button id="sbm-btn" type="submit" disabled >Add user</button>
                     </form>`);
 
 $userForm.prependTo('body');
+const $userAge = $('#inputAge');
+const $userFirstName = $('#inputFirstName');
 const $submitButton = $('#sbm-btn');
-const $minAgeRequired = $('#inputAge').val() > 18;
-const $minFirstNameLengthRequired = $('#inputFirstName').length > 3;
 
-function activateButtonOnRequirments() {
-    if ($minAgeRequired && $minFirstNameLengthRequired === true){
-        $submitButton.prop('disabled', false)
-    }
+function requirementsToActivate() {
+    const $minAgeRequired = 18;
+    const $minFirstNameLengthRequired = 3;
+    return $userAge.val() < $minAgeRequired ||
+        $userFirstName.val().length < $minFirstNameLengthRequired;
 }
 
-$minFirstNameLengthRequired.add($minAgeRequired).on('keyup', activateButtonOnRequirments);
+function validateRequrements() {
+    $submitButton.prop('disabled', requirementsToActivate)
+}
+
+$userAge.add($userFirstName).on('keyup', validateRequrements);
