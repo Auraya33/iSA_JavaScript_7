@@ -77,7 +77,6 @@ $tableRow.on('mouseleave', removeHighlightClass);
 // - formularz ma mieć select, z 5 miastami do wyboru (Twoja decyzja), pozostałe wartości pobrane z inputów textowych
 // - przycisk do dodania użytkownika ma być odblokowany jeśli wiek age > 18 a firstName ma więcej niż 3 litery
 
-
 const $userForm = $(`<form>
                     <input type="text" placeholder="First Name" name="firstName">
                     <input type="text" placeholder="Last Name" name="lastName">
