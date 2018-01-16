@@ -35,6 +35,7 @@ const getRowsWithUsers = () => {
             <td class="table-cell">${user.lastName}</td>
             <td class="table-cell">${user.age}</td>
             <td class="table-cell">${user.city}</td>
+            <td class="table-cell remove-icon fa fa-times" aria-hidden="true"> </td>
         </tr>
         `)
     })
@@ -43,7 +44,6 @@ const getRowsWithUsers = () => {
 $table.append(getRowsWithUsers());
 
 // A.
-// - Pierwsza komórka powinna zawierać checkbox, zaznaczenie checkboxa
 // ma wyświetlić w konsoli ID danego użytkownika//
 const $checkboxID = $('.cbox-id');
 
@@ -54,3 +54,27 @@ function getIdOnCheck() {
 
 $checkboxID.on('click', getIdOnCheck);
 
+
+// - Ostatnia komórka powinna zawierać X z klasą remove-icon, który usuwa dany rząd
+const $removeIcon = $('.remove-icon');
+
+function removeRow() {
+    $(this).closest('tr').remove()
+}
+
+$removeIcon.on('click', removeRow);
+
+
+//- najechanie na rząd ma go podświetlić
+const $tableRow = $('.tablerow');
+
+function addHiglightClass() {
+    $(this).addClass('highlight')
+}
+
+function removeHighlightClass() {
+    $(this).removeClass('highlight')
+}
+
+$tableRow.on('mouseenter', addHiglightClass);
+$tableRow.on('mouseleave', removeHighlightClass);
