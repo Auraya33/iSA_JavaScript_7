@@ -1,4 +1,3 @@
-
 /* TODO:EXTRAS!. ZADANIE DODATKOWE W MIEDZY CZASIE! *Zadanie domowe*
 - stworzyć dynamicznie tabelę <table> i wypełnić ją danymi z tablicy users. (mamy!)
 
@@ -8,13 +7,7 @@ A.
 - Ostatnia komórka powinna zawierać X z klasą remove-icon, który usuwa dany rząd
 - rząd powinien zawierać klasę table-row
 - komórka powinna zawierać klasę table-cell
-- najechanie na rząd ma go podświetlić
-
-B.
-- nad tabela być formularz, który pobiera dane usera i puszuje go do tablicy users i od razu pokazuje na widoku.
-- formularz ma mieć select, z 5 miastami do wyboru (Twoja decyzja), pozostałe wartości pobrane z inputów textowych
-- przycisk do dodania użytkownika ma być odblokowany jeśli wiek age > 18 a firstName ma więcej niż 3 litery
-*/
+- najechanie na rząd ma go podświetlić */
 
 const users = [
     {firstName: 'Tomasz', lastName: 'Doe', age: 23, city: 'London', id: 1},
@@ -78,3 +71,27 @@ function removeHighlightClass() {
 
 $tableRow.on('mouseenter', addHiglightClass);
 $tableRow.on('mouseleave', removeHighlightClass);
+
+// B.
+// - nad tabela być formularz, który pobiera dane usera i puszuje go do tablicy users i od razu pokazuje na widoku.
+// - formularz ma mieć select, z 5 miastami do wyboru (Twoja decyzja), pozostałe wartości pobrane z inputów textowych
+// - przycisk do dodania użytkownika ma być odblokowany jeśli wiek age > 18 a firstName ma więcej niż 3 litery
+
+
+const $userForm = $(`<form>
+                    <input type="text" placeholder="First Name" name="firstName">
+                    <input type="text" placeholder="Last Name" name="lastName">
+                    <input type="text" placeholder="Age" name="userAge">
+                    <select name="city">
+                        <option value="Gdansk">Gdańsk</option>
+                        <option value="Krakow">Kraków</option>
+                        <option value="Tokyo">Tokyo</option>
+                        <option value="Miami">Miami</option>
+                        <option value="Hamburg">Hamburg</option>
+                    </select>
+                    <button type="submit" disabled>Add user</button>
+                    </form>`);
+
+$userForm.prependTo('body');
+
+
