@@ -78,9 +78,9 @@ $tableRow.on('mouseleave', removeHighlightClass);
 // - przycisk do dodania użytkownika ma być odblokowany jeśli wiek age > 18 a firstName ma więcej niż 3 litery
 
 const $userForm = $(`<form>
-                    <input type="text" placeholder="First Name" name="firstName">
+                    <input id="inputFirstName" type="text" placeholder="First Name" name="firstName">
                     <input type="text" placeholder="Last Name" name="lastName">
-                    <input type="text" placeholder="Age" name="userAge">
+                    <input id="inputAge" type="text" placeholder="Age" name="userAge">
                     <select name="city">
                         <option value="Gdansk">Gdańsk</option>
                         <option value="Krakow">Kraków</option>
@@ -88,9 +88,18 @@ const $userForm = $(`<form>
                         <option value="Miami">Miami</option>
                         <option value="Hamburg">Hamburg</option>
                     </select>
-                    <button type="submit" disabled>Add user</button>
+                    <button id="sbm-btn" type="submit" disabled>Add user</button>
                     </form>`);
 
 $userForm.prependTo('body');
+const $submitButton = $('#sbm-btn');
+const $minAgeRequired = $('#inputAge').val() > 18;
+const $minFirstNameLengthRequired = $('#inputFirstName').length > 3;
 
+function activateButtonOnRequirments() {
+    if ($minAgeRequired && $minFirstNameLengthRequired === true){
+        $submitButton.prop('disabled', false)
+    }
+}
 
+$minFirstNameLengthRequired.add($minAgeRequired).on('keyup', activateButtonOnRequirments);
