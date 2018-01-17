@@ -38,28 +38,26 @@ $table.append(getRowsWithUsers());
 
 // A.
 // ma wyświetlić w konsoli ID danego użytkownika//
-const $checkboxID = $('.cbox-id');
 
 function getIdOnCheck() {
     $(this).prop('checked');
     console.log($(this).data('user'));
 }
 
-$checkboxID.on('click', getIdOnCheck);
+$table.on('click','.cbox-id', getIdOnCheck);
 
 
 // - Ostatnia komórka powinna zawierać X z klasą remove-icon, który usuwa dany rząd
-const $removeIcon = $('.remove-icon');
 
 function removeRow() {
     $(this).closest('tr').remove()
 }
 
-$removeIcon.on('click', removeRow);
+$table.on('click', '.remove-icon', removeRow);
 
 
 //- najechanie na rząd ma go podświetlić
-const $tableRow = $('.tablerow');
+// const $tableRow = $('.tablerow');
 
 function addHiglightClass() {
     $(this).addClass('highlight')
@@ -69,35 +67,30 @@ function removeHighlightClass() {
     $(this).removeClass('highlight')
 }
 
-$tableRow.on('mouseenter', addHiglightClass);
-$tableRow.on('mouseleave', removeHighlightClass);
+$table.on({ // sposób 2 - wiele eventów naraz
+    mouseenter: addHiglightClass,
+    mouseleave: removeHighlightClass
+}, 'tr');
 
 // B.
 // - nad tabela być formularz, który pobiera dane usera i puszuje go do tablicy users i od razu pokazuje na widoku.
 // - formularz ma mieć select, z 5 miastami do wyboru (Twoja decyzja), pozostałe wartości pobrane z inputów textowych
 
-function getId() {
-    for (let i = 0; i < users.length; i++) {
-      console.log (users.length[i])
-    }
-}
-
-const $userID = getId();
 const $userCity = $('#citiesSelect');
-const $userAge = $('#inputAge');
-const $userFirstName = $('#inputFirstName');
-const $userLastName = $('#inputLastName');
+const $userAge = $('#input-age');
+const $userFirstName = $('#input-first-name');
+const $userLastName = $('#input-last-name');
 const $submitButton = $('#sbm-btn');
 
 $submitButton.on('click', function() {
    users.push({
-        id: $userID,
         firstName: $userFirstName.val(),
         lastName: $userLastName.val(),
         age: $userAge.val(),
-        city: $userCity.val()
+        city: $userCity.val(),
+        id: users.length + 1
     });
-
+        $table.html(getRowsWithUsers());
 });
 
 
