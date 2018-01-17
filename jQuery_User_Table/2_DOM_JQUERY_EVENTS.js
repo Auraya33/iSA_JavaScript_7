@@ -75,7 +75,14 @@ $tableRow.on('mouseleave', removeHighlightClass);
 // B.
 // - nad tabela być formularz, który pobiera dane usera i puszuje go do tablicy users i od razu pokazuje na widoku.
 // - formularz ma mieć select, z 5 miastami do wyboru (Twoja decyzja), pozostałe wartości pobrane z inputów textowych
-const $id =
+
+function getId() {
+    for (let i = 0; i < users.length; i++) {
+      console.log (users.length[i])
+    }
+}
+
+const $userID = getId();
 const $userCity = $('#citiesSelect');
 const $userAge = $('#inputAge');
 const $userFirstName = $('#inputFirstName');
@@ -84,14 +91,15 @@ const $submitButton = $('#sbm-btn');
 
 $submitButton.on('click', function() {
    users.push({
-        id: $id.val(),
+        id: $userID,
         firstName: $userFirstName.val(),
         lastName: $userLastName.val(),
         age: $userAge.val(),
         city: $userCity.val()
     });
-             console.log(users)
+
 });
+
 
 // - przycisk do dodania użytkownika ma być odblokowany jeśli wiek age > 18 a firstName ma więcej niż 3 litery
 function requirementsToActivate() {
